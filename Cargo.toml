@@ -5,6 +5,7 @@ edition = "2024"
 description = "Generate every possible value of a struct or enum."
 license = "LGPL-3.0-or-later"
 readme = "README.md"
+repository = "https://github.com/Bishops-exe/wombocombo"
 keywords = ["template", "combinations", "enumerate", "macro", "derive"]
 
 
