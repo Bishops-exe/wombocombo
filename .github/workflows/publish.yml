@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Verify tag matches crate versions
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          cargo metadata --no-deps --format-version 1 \
+            | python3 -c 'import json,sys; [print(p["name"], p["version"]) for p in json.load(sys.stdin)["packages"]]' \
+            | while read name version; do
+                echo "$name = $version (tag $tag)"
+                [ "$version" = "$tag" ] || { echo "::error::$name version $version != tag v$tag"; exit 1; }
+              done
+
+      - name: cargo test
+        run: cargo test --workspace --all-features
+
+      - name: cargo publish
+        run: cargo publish --workspace
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
