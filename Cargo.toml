@@ -1,0 +1,15 @@
+[package]
+name = "wombocombo"
+version = "0.1.0"
+edition = "2024"
+description = "Generate every possible value of a struct or enum."
+license = "LGPL-3.0-or-later"
+keywords = ["template", "combinations", "enumerate", "macro", "derive"]
+
+
+[dependencies]
+wombocombo-macros = { path = "./wombocombo-macros", version = "0.1.0" }
+itertools = "0.15.0"
+
+[workspace]
+members = ["wombocombo-macros"]
