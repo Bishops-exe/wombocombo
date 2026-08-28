@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 description = "Generate every possible value of a struct or enum."
 license = "LGPL-3.0-or-later"
+readme = "README.md"
 keywords = ["template", "combinations", "enumerate", "macro", "derive"]
 
 
