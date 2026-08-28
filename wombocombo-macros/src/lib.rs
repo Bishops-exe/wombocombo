@@ -5,7 +5,7 @@ use syn::{parse_macro_input, Data, DeriveInput, Fields};
 macro_rules! err {
     ($key:expr, $err:expr) => {{
         let error = syn::Error::new($key.ident.span(), $err);
-        
+
         return Into::<TokenStream>::into(error.to_compile_error());
     }};
 }
